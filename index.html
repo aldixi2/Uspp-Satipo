@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>USPP · Unidad de Seguros Públicos y Privados — Red de Salud Satipo</title>
+<meta name="description" content="Unidad de Seguros Públicos y Privados de la Red de Salud Satipo: afiliación al SIS, trámite de sepelio, módulos institucionales y canales de atención." />
+<link rel="icon" href="assets/img/favicon-64.png" type="image/png" />
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-seal"><img src="assets/img/logo-uspp-icon.png" alt="" /></div>
+  <div class="loader-label">Red de Salud Satipo</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<!-- ===== MODAL ANUNCIO: CÓDIGOS MODULARES RG 002-2026 ===== -->
+<div class="modal-overlay" id="announcementModal" role="dialog" aria-modal="true" aria-label="Anuncio importante">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-header-icon">📢</div>
+      <div class="modal-header-text">
+        <div class="modal-badge">Actualización normativa</div>
+        <div class="modal-title">Cambio de Códigos Modulares por Curso de Vida en el FUA</div>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-alert">
+        <div>
+          <strong>Resolución Gerencial N.° 002-2026-SIS/GREP — Vigente</strong>
+          <p>Se aprobó la actualización de los códigos modulares por Curso de Vida aplicables al registro en el Formato Único de Atención (FUA). Es obligatorio aplicar los nuevos códigos.</p>
+        </div>
+      </div>
+      <div class="modal-chips">
+        <span class="modal-chip mc-blue">RG N.° 002-2026-SIS/GREP</span>
+        <span class="modal-chip mc-green">Vigente</span>
+        <span class="modal-chip mc-amber">FUA</span>
+        <span class="modal-chip mc-red">Aplicación obligatoria</span>
+      </div>
+      <div class="modal-video-wrap">
+        <video controls playsinline preload="metadata" style="position:absolute;inset:0;width:100%;height:100%;border:none;background:#000;">
+          <source src="assets/videos/codigos-modulares.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+      </div>
+      <div class="modal-details">
+        <div class="modal-details-title">Puntos clave a tener en cuenta</div>
+        <div class="modal-detail-item">
+          <div class="mdi-num">1</div>
+          <div class="mdi-text"><b>Nuevos códigos modulares por Curso de Vida</b><span>Los códigos fueron reorganizados según las etapas de vida del paciente: niño, adolescente, adulto y adulto mayor.</span></div>
+        </div>
+        <div class="modal-detail-item">
+          <div class="mdi-num">2</div>
+          <div class="mdi-text"><b>Aplicación en el registro del FUA</b><span>El código modular correcto debe consignarse en el campo correspondiente del FUA según el grupo etario del paciente.</span></div>
+        </div>
+        <div class="modal-detail-item">
+          <div class="mdi-num">3</div>
+          <div class="mdi-text"><b>Evita inconsistencias y rechazos</b><span>Coordina con tu punto de digitación para aplicar los cambios correctamente y evitar errores de valorización.</span></div>
+        </div>
+        <div class="modal-detail-item">
+          <div class="mdi-num">4</div>
+          <div class="mdi-text"><b>Soporte y consultas</b><span>Para dudas, comunícate con la USPP Satipo: <strong>USPPALDAIR@outlook.com</strong> o al 968 191 871.</span></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="modal-footer-note">Fuente: <strong>RG N.° 002-2026-SIS/GREP</strong> · USPP Red de Salud Satipo</div>
+        <button class="btn btn-primary" id="modalOk">Entendido ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="container navbar">
+    <a href="#inicio" class="brand">
+      <img src="assets/img/logo-uspp-icon.png" alt="USPP" class="brand-icon" />
+      <div class="brand-sep"></div>
+      <div><div class="brand-name">USPP · SATIPO</div><div class="brand-sub">Red de Salud</div></div>
+    </a>
+    <nav class="nav-links">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#seguros">Seguros SIS</a>
+      <a href="#documentos">Documentos</a>
+      <a href="#contacto">Contacto</a>
+      <a href="lineas-atencion.html">Líneas de Atención</a>
+      <a href="galeria.html">Galería</a>
+      <a href="pes.html">Trámite de Sepelio</a>
+      <a href="modulos.html" class="btn btn-gold btn-sm">📊 Módulos</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-scrim" id="mobileScrim"></div>
+<nav class="mobile-panel" id="mobilePanel">
+  <a href="#inicio">Inicio</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#seguros">Seguros SIS</a>
+  <a href="#documentos">Documentos</a>
+  <a href="#contacto">Contacto</a>
+  <a href="lineas-atencion.html">Líneas de Atención</a>
+  <a href="galeria.html">Galería</a>
+  <a href="pes.html">Trámite de Sepelio</a>
+  <a href="modulos.html">📊 Módulos</a>
+</nav>
+
+<main id="inicio">
+
+  <!-- HERO -->
+  <section class="hero hero-ink">
+    <div class="hero-contour"></div>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-kicker"><span class="hero-kicker-dot"></span>Unidad de Seguros Públicos y Privados</div>
+          <h1 class="hero-title">Aseguramiento en salud que llega hasta la <span class="hero-highlight">Selva Central</span></h1>
+          <p class="hero-text">Coordinamos el Seguro Integral de Salud (SIS) en toda la provincia de Satipo: afiliaciones, producción de FUA y el sistema de referencias y contrarreferencias, conectando a cada micro red con una atención oportuna.</p>
+          <div class="hero-actions">
+            <button class="btn btn-white" onclick="window.location.href='#seguros'">📄 Conocer el SIS</button>
+            <button class="btn btn-ghost-light" onclick="window.location.href='pes.html'">⚰️ Trámite de sepelio</button>
+            <button class="btn btn-ghost-light" onclick="window.location.href='modulos.html'">📊 Módulos</button>
+          </div>
+          <div class="hero-notice">
+            <div class="hero-notice-icon">🩺</div>
+            <div>
+              <div class="hero-notice-title">Afiliación sin costo</div>
+              <p class="hero-notice-text">El SIS Gratuito cubre a gestantes, niños menores de 5 años y personas en pobreza o pobreza extrema, sin costo alguno.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="id-card">
+          <div class="id-card-band"></div>
+          <div class="id-card-body">
+            <div class="id-card-eyebrow"><img src="assets/img/logo-uspp-icon.png" alt="" /><span class="eyebrow">Ficha institucional</span></div>
+            <div class="id-card-title">Unidad de Seguros Públicos y Privados</div>
+            <div class="id-card-grid">
+              <div class="id-card-field wide"><div class="id-field-label">Jefatura USPP</div><div class="id-field-value">Econ. Estefany Hilario Albiño</div></div>
+              <div class="id-card-field wide"><div class="id-field-label">Dirección Ejecutiva · Red Salud Satipo</div><div class="id-field-value">Obst. Ruth Calderón Huamán</div></div>
+              <div class="id-card-field"><div class="id-field-label">Teléfono</div><div class="id-field-value mono">925 466 291</div></div>
+              <div class="id-card-field"><div class="id-field-label">Correo</div><div class="id-field-value mono" style="font-size:.72rem">usppredsatipo@outlook.com</div></div>
+            </div>
+            <div class="id-card-footer">Jr. Manuel Prado 363, Satipo, Junín 12261<br/>Central Red Salud Satipo: (064) 545-411<br/>Lun a vie · 8:00 a.m.–1:00 p.m. y 2:30–5:30 p.m.</div>
+          </div>
+          <div class="id-card-seal"><div class="seal seal-ink" style="width:78px;height:78px;background:#fff"><img src="assets/img/logo-uspp-icon.png" alt="" /></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="section bg-mist">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Nosotros</div>
+        <h2 class="section-title">Unidad de Seguros Públicos y Privados</h2>
+        <p class="section-subtitle">Somos el área de la Red de Salud Satipo responsable del aseguramiento universal en salud, desde la ciudad hasta las comunidades nativas más alejadas de la provincia.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon ic-ink">🎯</div>
+          <h3>Misión</h3>
+          <p>Coordinar el Seguro Integral de Salud (SIS) en toda la Red de Salud Satipo —afiliaciones, producción de FUA y el sistema de referencias y contrarreferencias— para que cada asegurado acceda a una atención oportuna y de calidad.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon ic-river">🔭</div>
+          <h3>Visión</h3>
+          <p>Ser una unidad de referencia en la gestión del aseguramiento en salud de la Selva Central, reconocida por su eficiencia y cercanía con el asegurado, bajo los principios de universalidad, equidad y calidad.</p>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon ic-gold">⚙️</div>
+          <h3>Funciones principales</h3>
+          <ul>
+            <li>Gestión de afiliaciones al SIS</li>
+            <li>Supervisión de producción y digitación oportuna de FUA</li>
+            <li>Control de calidad y consistencia de datos</li>
+            <li>Soporte técnico a los puntos de digitación de las micro redes</li>
+            <li>Seguimiento de indicadores sanitarios y financieros</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-card" style="margin-top:1.3rem">
+        <div class="info-card-icon ic-achiote">🗺️</div>
+        <h3>Nuestros puntos de digitación</h3>
+        <p>Trabajamos de manera articulada con los establecimientos de salud y micro redes de toda la provincia, incluyendo comunidades nativas asháninka a lo largo de toda la selva central.</p>
+        <div class="territory-wrap">
+          <span class="territory-chip">Red de Salud Satipo</span>
+          <span class="territory-chip">Centro de Salud Rio Negro</span>
+	  <span class="territory-chip">Centro de Salud Union Capiri</span>
+          <span class="territory-chip">Centro de Salud Coviriali</span>
+          <span class="territory-chip">Puesto de Salud Mariposa</span>
+          <span class="territory-chip">Centro de Salud Mental Comunitario Satipo</span>
+          <span class="territory-chip">Hospital Manuel Ángel Higa Arakaki</span>
+	  <span class="territory-chip">Centro de Salud Mazamari</span>
+	  <span class="territory-chip">Centro de Salud Llaylla</span>
+	  <span class="territory-chip">Centro de Salud Puerto Ocopa</span>
+	  <span class="territory-chip">Centro de Salud San Vicente de Canaan</span>
+	  <span class="territory-chip">Centro de Salud San Valle Esmeralda</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEGUROS -->
+  <section id="seguros" class="section bg-tint-gold">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Afiliaciones</div>
+        <h2 class="section-title">Seguro Integral de Salud</h2>
+        <p class="section-subtitle">Información sobre el proceso de afiliación, beneficios y requisitos del SIS.</p>
+      </div>
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-card-icon ic-river">👥</div>
+          <h3>¿Quiénes pueden afiliarse?</h3>
+          <p>El SIS está dirigido a personas en situación de pobreza, pobreza extrema y poblaciones vulnerables.</p>
+          <ul>
+            <li>Gestantes y niños menores de 5 años</li>
+            <li>Personas en pobreza y extrema pobreza</li>
+            <li>Adultos mayores sin pensión</li>
+            <li>Personas con discapacidad</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon ic-gold">📄</div>
+          <h3>Requisitos</h3>
+          <p>Documentos necesarios para realizar tu afiliación al SIS.</p>
+          <ul>
+            <li>DNI o Carné de Extranjería</li>
+            <li>No contar con otro tipo de seguro</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <div class="info-card-icon ic-achiote">✅</div>
+          <h3>Beneficios</h3>
+          <p>Cobertura integral para atenciones de salud preventivas, promocionales, recuperativas y de rehabilitación.</p>
+          <ul>
+            <li>Consultas médicas gratuitas</li>
+            <li>Medicamentos cubiertos</li>
+            <li>Exámenes de laboratorio</li>
+            <li>Atención de emergencias</li>
+            <li>Hospitalización cuando sea necesaria</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top:2.8rem">
+        <div class="section-header center" style="margin-left:auto;margin-right:auto">
+          <h3 class="section-title" style="font-size:1.3rem">Tipos de Seguro SIS</h3>
+          <p class="section-subtitle">Conoce las diferentes modalidades de afiliación disponibles (pasa el mouse sobre las tarjetas).</p>
+        </div>
+        <div class="sis-cards-wrapper">
+          <div class="sis-flip-card" data-href="https://www.gob.pe/133-afiliarte-al-sis-gratuito" role="link" tabindex="0">
+            <div class="sis-flip-inner">
+              <div class="sis-flip-front" data-variant="gratuito"><div class="sis-ribbon">SIS Gratuito</div><img src="assets/img/SIS_gratuito.jpg" alt="SIS Gratuito" class="sis-img"><div class="sis-body"><div class="sis-badge">Gratuito</div><div class="sis-title">SIS Gratuito</div><div class="sis-desc">Para personas en situación de pobreza y extrema pobreza sin capacidad de pago.</div></div></div>
+              <div class="sis-flip-back"><h4>✓ Cobertura SIS Gratuito</h4><ul><li>Sin costo alguno</li><li>Atención preventiva</li><li>Consultas especializadas</li><li>Medicamentos incluidos</li><li>Hospitalizaciones cubiertas</li></ul></div>
+            </div>
+          </div>
+          <div class="sis-flip-card" data-href="https://www.gob.pe/8970-afiliarte-al-sis-para-todos" role="link" tabindex="0">
+            <div class="sis-flip-inner">
+              <div class="sis-flip-front" data-variant="paratodos"><div class="sis-ribbon">SIS Para Todos</div><img src="assets/img/SIS_Paratodos.jpg" alt="SIS Para Todos" class="sis-img"><div class="sis-body"><div class="sis-badge">Para Todos</div><div class="sis-title">SIS Para Todos</div><div class="sis-desc">Para peruanos y extranjeros residentes que no cuentan con otro seguro de salud.</div></div></div>
+              <div class="sis-flip-back"><h4>✓ Beneficios SIS Para Todos</h4><ul><li>Acceso universal</li><li>Sin límite de edad</li><li>Cobertura integral</li><li>Afiliación rápida</li><li>Atención oportuna</li></ul></div>
+            </div>
+          </div>
+          <div class="sis-flip-card" data-href="https://www.gob.pe/172-sis-independiente" role="link" tabindex="0">
+            <div class="sis-flip-inner">
+              <div class="sis-flip-front" data-variant="independiente"><div class="sis-ribbon">SIS Independiente</div><img src="assets/img/SIS_Independiente.jpg" alt="SIS Independiente" class="sis-img"><div class="sis-body"><div class="sis-badge">Independiente</div><div class="sis-title">SIS Independiente</div><div class="sis-desc">Para trabajadores independientes con aportes mensuales accesibles.</div></div></div>
+              <div class="sis-flip-back"><h4>✓ SIS Independiente</h4><ul><li>Aporte mensual bajo</li><li>Flexibilidad laboral</li><li>Cobertura familiar opcional</li><li>Atención inmediata</li><li>Red nacional</li></ul></div>
+            </div>
+          </div>
+          <div class="sis-flip-card" data-href="https://www.gob.pe/180-sis-microempresas" role="link" tabindex="0">
+            <div class="sis-flip-inner">
+              <div class="sis-flip-front" data-variant="microempresas"><div class="sis-ribbon">SIS Microempresas</div><img src="assets/img/SIS_Microempresas.jpg" alt="SIS Microempresas" class="sis-img"><div class="sis-body"><div class="sis-badge">Microempresas</div><div class="sis-title">SIS Microempresas</div><div class="sis-desc">Para trabajadores y conductores de microempresas de hasta 10 trabajadores.</div></div></div>
+              <div class="sis-flip-back"><h4>✓ SIS Microempresas</h4><ul><li>Hasta 10 trabajadores</li><li>Cobertura grupal</li><li>Aportes compartidos</li><li>Incluye al empleador</li><li>Gestión simplificada</li></ul></div>
+            </div>
+          </div>
+          <div class="sis-flip-card" data-href="https://www.gob.pe/152-sis-emprendedor" role="link" tabindex="0">
+            <div class="sis-flip-inner">
+              <div class="sis-flip-front" data-variant="emprendedor"><div class="sis-ribbon">SIS Emprendedor</div><img src="assets/img/SIS_Emprendedor.jpg" alt="SIS Emprendedor" class="sis-img"><div class="sis-body"><div class="sis-badge">Emprendedor</div><div class="sis-title">SIS Emprendedor</div><div class="sis-desc">Para emprendedores que desarrollan actividades económicas por cuenta propia.</div></div></div>
+              <div class="sis-flip-back"><h4>✓ SIS Emprendedor</h4><ul><li>Ideal para emprendedores</li><li>Aporte individual</li><li>Cobertura completa</li><li>Trámite ágil</li><li>Apoyo al negocio</li></ul></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOCUMENTOS -->
+  <section id="documentos" class="section bg-tint-river">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Documentos</div>
+        <h2 class="section-title">Repositorio institucional USPP · Satipo</h2>
+        <p class="section-subtitle">Accede a normas, directivas, manuales y documentos oficiales del SIS.</p>
+      </div>
+      <div class="doc-section">
+        <div class="doc-slider-wrap">
+          <button class="slider-btn left" type="button" aria-label="Anterior">‹</button>
+          <div class="doc-slider">
+            <a href="https://www.gob.pe/institucion/sis/normas-legales/1201480-112-2020-sis" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">RJ</div><div class="doc-meta">Normativa · Afiliación</div><div class="doc-title">Resolución Jefatural 112-2020-SIS</div><div class="doc-desc">Lineamientos para afiliación y gestión del aseguramiento SIS.</div><div class="doc-tags"><span class="doc-tag">SIS</span><span class="doc-tag">Afiliación</span></div></div><div class="doc-linkhint"><span>Ver documento</span><span>↗</span></div></a>
+            <a href="https://www.gob.pe/institucion/sis/normas-legales/3597771-199-2022-sis-j" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">RJ</div><div class="doc-meta">Normativa · Convenios</div><div class="doc-title">RJ N.° 199-2022-SIS/J</div><div class="doc-desc">Operativización de convenios SIS y actores involucrados.</div><div class="doc-tags"><span class="doc-tag">Convenios</span></div></div><div class="doc-linkhint"><span>Ver documento</span><span>↗</span></div></a>
+            <a href="https://www.gob.pe/institucion/sis/normas-legales/6245149-000178-2024-sis-j" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">RJ</div><div class="doc-meta">Directiva · 2024 · FUA</div><div class="doc-title">RJ N.° 000178-2024-SIS/J</div><div class="doc-desc">Directiva para el registro de prestaciones SIS en el FUA.</div><div class="doc-tags"><span class="doc-tag">FUA</span><span class="doc-tag">Directiva</span></div></div><div class="doc-linkhint"><span>Ver documento</span><span>↗</span></div></a>
+            <a href="https://www.gob.pe/institucion/sis/normas-legales/7270174-000124-2025-sis-j" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">RJ</div><div class="doc-meta">Tarifario · 2025</div><div class="doc-title">RJ N.° 000124-2025-SIS/J</div><div class="doc-desc">Tarifario de Procedimientos Médicos y Sanitarios del SIS 2025.</div><div class="doc-tags"><span class="doc-tag">Tarifario</span></div></div><div class="doc-linkhint"><span>Ver documento</span><span>↗</span></div></a>
+            <a href="https://www.gob.pe/institucion/sis/normas-legales/7127644-000115-2025-sis-j" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">RJ</div><div class="doc-meta">Normativa · Convenios · 2025</div><div class="doc-title">RJ N.° 115-2025-SIS/J</div><div class="doc-desc">Operativización de convenios SIS y actores involucrados para el periodo 2025.</div><div class="doc-tags"><span class="doc-tag">Convenios</span><span class="doc-tag">2025</span></div></div><div class="doc-linkhint"><span>Ver documento</span><span>↗</span></div></a>
+            <a href="https://www.gob.pe/institucion/fissal/informes-publicaciones/6724460-convenio-entre-sis-fissal-y-el-gobierno-regional-de-junin-periodo-2025-2027" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">CV</div><div class="doc-meta">Convenio · FISSAL · 2025–2027</div><div class="doc-title">Convenio SIS/FISSAL/GORE Junín 2025–2027</div><div class="doc-desc">Convenio entre SIS, FISSAL y el Gobierno Regional de Junín para el periodo 2025–2027.</div><div class="doc-tags"><span class="doc-tag">Convenio</span><span class="doc-tag">FISSAL</span></div></div><div class="doc-linkhint"><span>Ver convenio</span><span>↗</span></div></a>
+            <a href="https://cdn.www.gob.pe/uploads/document/file/9585510/6724460-segunda-adenda-gore-junin.pdf?v=1773235453" target="_blank" rel="noopener" class="doc-slide"><div><div class="doc-icon">AD</div><div class="doc-meta">Adenda · 2026 · PDF</div><div class="doc-title">Segunda Adenda GORE Junín 2026</div><div class="doc-desc">Adenda vinculada al convenio SIS/FISSAL/GORE Junín para la continuidad operativa en 2026.</div><div class="doc-tags"><span class="doc-tag">Adenda</span><span class="doc-tag">PDF</span></div></div><div class="doc-linkhint"><span>Ver adenda</span><span>↗</span></div></a>
+          </div>
+          <button class="slider-btn right" type="button" aria-label="Siguiente">›</button>
+        </div>
+        <div class="dots" id="docDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HORARIO -->
+  <section id="horario" class="section bg-tint-achiote">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Atención</div>
+        <h2 class="section-title">Horario de Atención</h2>
+        <p class="section-subtitle">Estamos disponibles para atenderte.</p>
+      </div>
+      <div class="schedule-card">
+        <div class="clock-wrap">🕐</div>
+        <div id="scheduleTime">00:00:00</div>
+        <div id="scheduleDate">Cargando...</div>
+        <div class="schedule-info">
+          <div class="schedule-item"><span class="schedule-label">Lunes a viernes: </span><span class="schedule-value">8:00 a.m.–1:00 p.m. · 2:30–5:30 p.m.</span></div>
+          <div class="schedule-item"><span class="schedule-label">Sábados y domingos: </span><span class="schedule-value">Cerrado</span></div>
+          <div class="schedule-item"><span class="schedule-label">Feriados: </span><span class="schedule-value">Cerrado</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UBICACIÓN -->
+  <section id="ubicacion" class="section bg-mist">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Ubicación</div>
+        <h2 class="section-title">USPP · Red de Salud Satipo</h2>
+        <p class="section-subtitle">Jr. Manuel Prado 363, Satipo, Junín 12261.</p>
+      </div>
+      <div class="map-wrapper">
+        <iframe class="map-iframe" src="https://www.google.com/maps?q=-11.2544754,-74.637367&hl=es&z=17&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      <div style="text-align:center;margin-top:1.1rem">
+        <a class="btn btn-outline btn-sm" href="https://www.google.com/maps/place/Red+Salud+Satipo/@-11.2541907,-74.637743,245m/data=!3m1!1e3!4m6!3m5!1s0x910bc0ff9c3884a5:0xdf3578df1b0aa730!8m2!3d-11.2544754!4d-74.637367!16s%2Fg%2F1pp2vhg1n" target="_blank" rel="noopener">📍 Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section bg-tint-gold">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Contacto</div>
+        <h2 class="section-title">Canales de atención de la USPP Satipo</h2>
+        <p class="section-subtitle">Para consultas o coordinaciones, utiliza los canales institucionales.</p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-card-header"><div class="contact-card-icon">🏥</div><h3>Información institucional</h3></div>
+          <ul class="contact-list">
+            <li><strong>Dirección</strong><span class="value">Jr. Manuel Prado 363, Satipo, Junín 12261</span></li>
+            <li><strong>Central</strong><span class="value mono">(064) 545-411</span></li>
+            <li><strong>Jefatura USPP</strong><span class="value mono">925 466 291</span></li>
+            <li><strong>Correo</strong><span class="value mono">usppredsatipo@outlook.com</span></li>
+            <li><strong>Horario</strong><span class="value">Lun a vie, 8:00 a.m.–1:00 p.m. y 2:30–5:30 p.m.</span></li>
+          </ul>
+          <a href="lineas-atencion.html" class="btn btn-outline btn-sm mt-2">Ver directorio completo →</a>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-header"><div class="contact-card-icon">✉️</div><h3>Escríbenos directamente</h3></div>
+          <p style="font-size:.86rem;color:var(--stone);line-height:1.6">Elige el canal que prefieras — te responderemos en nuestro horario de atención.</p>
+          <div class="contact-quick">
+            <a class="quick-btn" href="mailto:USPPALDAIR@outlook.com?subject=Consulta%20USPP%20Satipo">
+              <div class="quick-btn-icon" style="background:#DCEAF3">✉️</div>
+              <div class="quick-btn-text"><b>Enviar un correo</b><span>usppredsatipo@outlook.com</span></div>
+            </a>
+            <a class="quick-btn" href="tel:+5164545411">
+              <div class="quick-btn-icon" style="background:#E4E3E7">📞</div>
+              <div class="quick-btn-text"><b>Llamar a Red Salud Satipo</b><span>(064) 545-411</span></div>
+            </a>
+            <a class="quick-btn" href="tel:+51925466291">
+              <div class="quick-btn-icon" style="background:#FBEACB">📱</div>
+              <div class="quick-btn-text"><b>Llamar a Jefatura USPP</b><span>925 466 291</span></div>
+            </a>
+            <a class="quick-btn" href="https://wa.me/519254662911" target="_blank" rel="noopener">
+              <div class="quick-btn-icon" style="background:#F6DBE1">💬</div>
+              <div class="quick-btn-text"><b>Escribir por WhatsApp</b><span>925 466 291</span></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-uspp-icon.png" alt="USPP" />
+        <div><div class="footer-brand-name">USPP · Red de Salud Satipo</div><div class="footer-brand-sub">Unidad de Seguros Públicos y Privados</div></div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <a href="#inicio">Inicio</a><a href="#nosotros">Nosotros</a><a href="#seguros">Seguros SIS</a><a href="#contacto">Contacto</a>
+        </div>
+        <div class="footer-col">
+          <h4>Servicios</h4>
+          <a href="pes.html">Trámite de Sepelio</a><a href="lineas-atencion.html">Líneas de Atención</a><a href="galeria.html">Galería</a><a href="modulos.html">Módulos</a>
+        </div>
+        <div class="footer-col">
+          <h4>Unidad</h4>
+          <a href="tel:+5164545411">(064) 545-411</a><a href="mailto:usppredsatipo@outlook.com">usppredsatipo@outlook.com</a><span style="display:block;padding:.28rem 0;font-size:.83rem;color:rgba(255,255,255,.6)">Jr. Manuel Prado 363, Satipo</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> USPP – Red de Salud Satipo. Todos los derechos reservados. Pagina Web Creada por Junnior Aldair Illesca Medina.</span>
+      <div class="flex gap-2">
+        <a href="#inicio" style="color:rgba(255,255,255,.4)">Inicio</a>
+        <a href="galeria.html" style="color:rgba(255,255,255,.4)">Galería</a>
+        <a href="modulos.html" style="color:rgba(255,255,255,.4)">Módulos</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
