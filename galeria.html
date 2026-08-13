@@ -1,22 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Galería — USPP · Red de Salud Satipo</title>
-<meta name="description" content="Actividades de la Unidad de Seguros Públicos y Privados en la Red de Salud Satipo: campañas, capacitaciones y asistencia técnica en toda la provincia." />
-<link rel="icon" href="assets/img/favicon-64.png" type="image/png" />
-<link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
-<link rel="stylesheet" href="assets/css/styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería — USPP · Red de Salud Satipo</title>
+  <meta name="description" content="Actividades de la Unidad de Seguros Públicos y Privados en la Red de Salud Satipo: campañas, capacitaciones y asistencia técnica en toda la provincia." />
+  <link rel="icon" href="assets/img/favicon-64.png" type="image/png" />
+  <link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <style>
+    /* ===== ESTILOS EXCLUSIVOS PARA EL CARRUSEL ===== */
+    .carousel-wrapper {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: #000;
+    }
+
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #0f0f0f;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 2rem 1.8rem;
+      background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+      color: #fff;
+      pointer-events: none;
+    }
+
+    .carousel-caption h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+      color: #fff;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .carousel-caption p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      color: #f0e6d3;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+      margin: 0;
+    }
+
+    /* Controles */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(255,255,255,0.35);
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .carousel-btn.prev { left: 1.2rem; }
+    .carousel-btn.next { right: 1.2rem; }
+
+    /* Puntos indicadores */
+    .carousel-dots {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.6rem;
+      z-index: 10;
+      background: rgba(0,0,0,0.3);
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: #F4C868;
+      transform: scale(1.3);
+      box-shadow: 0 0 12px rgba(244,200,104,0.5);
+    }
+
+    .carousel-dot:hover {
+      background: rgba(255,255,255,0.8);
+    }
+
+    /* Indicador de total de fotos (opcional) */
+    .carousel-counter {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.15);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .carousel-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+      .carousel-btn.prev { left: 0.6rem; }
+      .carousel-btn.next { right: 0.6rem; }
+      .carousel-caption {
+        padding: 1rem 1.2rem 1.2rem;
+      }
+      .carousel-caption h3 {
+        font-size: 0.9rem;
+      }
+      .carousel-caption p {
+        font-size: 0.65rem;
+      }
+      .carousel-dots {
+        gap: 0.4rem;
+        padding: 0.3rem 0.6rem;
+      }
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  </style>
 </head>
 <body>
 
+<!-- ===== LOADER ===== -->
 <div id="loader">
   <div class="loader-seal"><img src="assets/img/logo-uspp-icon.png" alt="" /></div>
   <div class="loader-label">Red de Salud Satipo</div>
   <div class="loader-bar"><div class="loader-bar-fill"></div></div>
 </div>
 
+<!-- ===== HEADER ===== -->
 <header>
   <div class="container navbar">
     <a href="index.html" class="brand">
@@ -51,6 +227,7 @@
   <a href="modulos.html">📊 Módulos</a>
 </nav>
 
+<!-- ===== MAIN ===== -->
 <main>
   <section class="page-hero hero-ink">
     <div class="hero-contour"></div>
@@ -64,30 +241,43 @@
     </div>
   </section>
 
+  <!-- ===== CARRUSEL DE IMÁGENES ===== -->
   <section class="section bg-mist">
     <div class="container">
-      <div class="empty-note">
+
+      <!-- Contenedor del carrusel -->
+      <div class="carousel-wrapper" id="carouselWrapper">
+        <div class="carousel-slides" id="carouselSlides">
+          <!-- Las diapositivas se inyectan desde JavaScript -->
+        </div>
+
+        <!-- Controles -->
+        <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">‹</button>
+        <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">›</button>
+
+        <!-- Puntos -->
+        <div class="carousel-dots" id="carouselDots"></div>
+
+        <!-- Contador -->
+        <div class="carousel-counter" id="carouselCounter">1 / 0</div>
+      </div>
+
+      <!-- Instrucción (opcional) -->
+      <div class="empty-note" style="margin-top: 2rem;">
         <div class="empty-note-icon">📷</div>
         <div>
-          <b>Espacio listo para tus fotografías</b>
-          <p>Estas tarjetas representan las categorías reales de actividades de la unidad. Súbenos las fotografías de cada actividad y las incorporamos en su lugar.</p>
+          <b>¿Cómo actualizar las fotos?</b>
+          <p>Para poder publicarlas en la galería de nuestra página web oficial, necesito que me envíen las imágenes en formato horizontal (apaisado), con buena resolución y nitidez.
+
+Por favor, envíenlas a este WhatsApp (991193863)Si tienen dudas sobre el formato, quedo atento para orientarlos. ¡Muchas gracias por su colaboración!".</p>
         </div>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-placeholder"><div class="gp-icon ic-river">🏘️</div><b>Atención integral a comunidades nativas</b><span>Mazamari · Poyeni</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-gold">💚</div><b>Campaña Multisectorial de Salud</b><span>Comunidad Nativa de Poyeni</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-achiote">🖥️</div><b>Supervisión de FUA</b><span>Puntos de digitación</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-ink">🎓</div><b>Capacitación a Unidades Ejecutoras</b><span>Selva Central</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-river">🩺</div><b>Asistencia técnica</b><span>Centro de Salud Río Negro</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-gold">🩺</div><b>Asistencia técnica</b><span>Centro de Salud Mazamari</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-achiote">🤝</div><b>Asistencia técnica UDR</b><span>Digitadores y jefaturas de micro redes</span></div>
-        <div class="gallery-placeholder"><div class="gp-icon ic-ink">📋</div><b>Afiliaciones y campañas SIS</b><span>Jornadas en campo</span></div>
-      </div>
     </div>
   </section>
 </main>
 
+<!-- ===== FOOTER ===== -->
 <footer>
   <div class="container">
     <div class="footer-top">
@@ -107,6 +297,204 @@
   </div>
 </footer>
 
+<!-- ===== SCRIPTS ===== -->
 <script src="assets/js/main.js"></script>
+
+<script>
+  // ============================================================
+  // 📁 REPOSITORIO DE IMÁGENES (CAMBIA AQUÍ TUS URLs)
+  // ============================================================
+  // INSTRUCCIÓN: Reemplaza "URL_DIRECTA_DE_IMGBB" por el enlace
+  // que termina en .jpg (Direct Link). 
+  // Puedes agregar o quitar objetos libremente.
+  // ============================================================
+
+  const imagenes = [
+    {
+      url: "https://i.ibb.co/zW7BKC1q/770901532-2225398658316493-6989246803552181716-n.jpg",
+      titulo: "Capacitación Codigos Modulares",
+      lugar: "Red de Salud Satipo · Satipo"
+    },
+    {
+      url: "https://i.ibb.co/jnN74RQ/Whats-App-Image-2026-06-24-at-1-54-32-PM-1.jpg",
+      titulo: "Supervisión UDR",
+      lugar: "Hospital Manuel Angel Higa Arakaki · Satipo"
+    },
+    {
+      url: "https://i.ibb.co/5gSJ1kZn/Whats-App-Image-2026-06-24-at-1-54-35-PM-3.jpg",
+      titulo: "Supervisión UDR",
+      lugar: "Centro de Salud Mazamari · Mazamari"
+    },
+    {
+      url: "https://i.ibb.co/0Vsx9PfH/Whats-App-Image-2026-06-26-at-4-21-26-PM.jpg",
+      titulo: "Campaña Multisectorial",
+      lugar: "Satipo"
+    },
+    {
+      url: "URL_DIRECTA_DE_IMGBB_4",
+      titulo: "Capacitación a Unidades Ejecutoras",
+      lugar: "Selva Central"
+    },
+    {
+      url: "URL_DIRECTA_DE_IMGBB_5",
+      titulo: "Asistencia técnica",
+      lugar: "Centro de Salud Río Negro"
+    },
+    {
+      url: "URL_DIRECTA_DE_IMGBB_6",
+      titulo: "Asistencia técnica",
+      lugar: "Centro de Salud Mazamari"
+    },
+    {
+      url: "URL_DIRECTA_DE_IMGBB_7",
+      titulo: "Asistencia técnica UDR",
+      lugar: "Digitadores y jefaturas de micro redes"
+    },
+    {
+      url: "URL_DIRECTA_DE_IMGBB_8",
+      titulo: "Afiliaciones y campañas SIS",
+      lugar: "Jornadas en campo"
+    }
+    // 👇 Puedes agregar más fotos aquí, solo copia la estructura
+    // {
+    //   url: "https://i.ibb.co/...",
+    //   titulo: "Nueva actividad",
+    //   lugar: "Lugar"
+    // },
+  ];
+
+  // ============================================================
+  // 🚀 MOTOR DEL CARRUSEL (NO TOCAR)
+  // ============================================================
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const slidesContainer = document.getElementById('carouselSlides');
+    const dotsContainer = document.getElementById('carouselDots');
+    const counter = document.getElementById('carouselCounter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const wrapper = document.getElementById('carouselWrapper');
+
+    let currentIndex = 0;
+    let total = imagenes.length;
+    let autoPlayInterval = null;
+    let isHovering = false;
+
+    // Construir slides y dots
+    function buildCarousel() {
+      slidesContainer.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      imagenes.forEach((img, index) => {
+        // Slide
+        const slide = document.createElement('div');
+        slide.className = 'carousel-slide';
+        slide.innerHTML = `
+          <img src="${img.url}" alt="${img.titulo}" loading="lazy" />
+          <div class="carousel-caption">
+            <h3>${img.titulo}</h3>
+            <p>${img.lugar}</p>
+          </div>
+        `;
+        slidesContainer.appendChild(slide);
+
+        // Dot
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        dot.setAttribute('aria-label', `Ir a diapositiva ${index + 1}`);
+        dot.dataset.index = index;
+        dot.addEventListener('click', function() {
+          goTo(parseInt(this.dataset.index));
+        });
+        dotsContainer.appendChild(dot);
+      });
+
+      // Actualizar contador
+      updateCounter();
+      updateDots();
+      updateSlide();
+    }
+
+    function updateSlide() {
+      const offset = -currentIndex * 100;
+      slidesContainer.style.transform = `translateX(${offset}%)`;
+    }
+
+    function updateDots() {
+      document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function updateCounter() {
+      counter.textContent = `${currentIndex + 1} / ${total}`;
+    }
+
+    function goTo(index) {
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+      currentIndex = index;
+      updateSlide();
+      updateDots();
+      updateCounter();
+    }
+
+    function next() {
+      goTo(currentIndex + 1);
+    }
+
+    function prev() {
+      goTo(currentIndex - 1);
+    }
+
+    // Autoplay
+    function startAutoplay() {
+      if (autoPlayInterval) clearInterval(autoPlayInterval);
+      if (total <= 1) return;
+      autoPlayInterval = setInterval(() => {
+        if (!isHovering) {
+          next();
+        }
+      }, 4000);
+    }
+
+    function stopAutoplay() {
+      if (autoPlayInterval) {
+        clearInterval(autoPlayInterval);
+        autoPlayInterval = null;
+      }
+    }
+
+    // Eventos de hover para pausar
+    wrapper.addEventListener('mouseenter', () => {
+      isHovering = true;
+    });
+    wrapper.addEventListener('mouseleave', () => {
+      isHovering = false;
+    });
+
+    // Eventos de los botones
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    // Teclado (opcional)
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Inicializar
+    buildCarousel();
+    startAutoplay();
+
+    // Si el total cambia dinámicamente (no en este caso), pero lo dejamos.
+    // También detener autoplay si no hay imágenes
+    if (total === 0) {
+      slidesContainer.innerHTML = '<div class="carousel-slide" style="display:flex;align-items:center;justify-content:center;background:#1a1a1a;color:white;font-size:1.2rem;">No hay imágenes para mostrar</div>';
+      counter.textContent = '0 / 0';
+    }
+  });
+</script>
+
 </body>
 </html>
