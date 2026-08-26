@@ -5,6 +5,51 @@ let MAPA = null;
 let MARCADORES = new Map(); // nombre+lat -> {marker, data}
 let MARKER_ACTIVO = null;
 
+/**
+ * Capa base con respaldo automático.
+ * Los proveedores de tiles "gratis" (CARTO, Esri, etc.) cambian sus políticas
+ * sin avisar y a veces empiezan a pedir API key de la nada (ya nos pasó una vez).
+ * Por eso: probamos primero un estilo gris claro y minimalista (bonito, a juego
+ * con la marca), pero si en los primeros segundos vemos que varios tiles fallan
+ * en cargar (403, "API key required", etc.), cambiamos solo — sin intervención —
+ * a OpenStreetMap estándar, que es 100% gratis y sin llave, así el mapa NUNCA
+ * se queda roto para quien lo visite.
+ */
+function agregarCapaBaseConRespaldo(mapa){
+  const PRINCIPAL = {
+    url: "https://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
+    opciones: {
+      attribution: '&copy; <a href="https://www.esri.com">Esri</a> — Light Gray Canvas, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 16
+    }
+  };
+  const RESPALDO = {
+    url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    opciones: {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }
+  };
+
+  let fallosDeTeja = 0;
+  let yaCambio = false;
+  const UMBRAL_FALLOS = 3; // si 3+ tiles fallan al inicio, algo anda mal con el proveedor
+
+  const capaPrincipal = L.tileLayer(PRINCIPAL.url, PRINCIPAL.opciones);
+
+  capaPrincipal.on("tileerror", () => {
+    fallosDeTeja++;
+    if (fallosDeTeja >= UMBRAL_FALLOS && !yaCambio){
+      yaCambio = true;
+      console.warn("Mapa: el proveedor principal de tiles está fallando, cambiando a OpenStreetMap de respaldo.");
+      mapa.removeLayer(capaPrincipal);
+      L.tileLayer(RESPALDO.url, RESPALDO.opciones).addTo(mapa);
+    }
+  });
+
+  capaPrincipal.addTo(mapa);
+}
+
 const COLOR_POR_CLASIFICACION = {
   "Puesto de Salud": "var(--river-bright)",
   "Centro de Salud": "var(--achiote-bright)",
@@ -73,10 +118,7 @@ async function init(){
 
   // Mapa base
   MAPA = L.map("mapaLeaflet", { scrollWheelZoom: true });
-  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    maxZoom: 18
-  }).addTo(MAPA);
+  agregarCapaBaseConRespaldo(MAPA);
 
   const bounds = L.latLngBounds(TODOS.map(x => [x.lat, x.lng]));
   MAPA.fitBounds(bounds, { padding: [30, 30] });
