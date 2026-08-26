@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mapa de Establecimientos — USPP · Red de Salud Satipo</title>
+<meta name="description" content="Mapa interactivo de los 91 establecimientos de salud de la provincia de Satipo y los puntos de digitación de la USPP." />
+<link rel="icon" href="assets/img/favicon-64.png" type="image/png" />
+<link rel="apple-touch-icon" href="assets/img/favicon-180.png" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css" />
+<style>
+  /* ===== Página Mapa — estilos propios ===== */
+  .mapa-shell{display:grid;grid-template-columns:360px 1fr;gap:1.1rem;align-items:start}
+  @media(max-width:980px){.mapa-shell{grid-template-columns:1fr}}
+
+  .mapa-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;display:flex;flex-direction:column;height:min(78vh,720px)}
+  .mapa-search{padding:1rem 1.1rem .8rem;border-bottom:1px solid var(--border-soft)}
+  .mapa-search input{width:100%;padding:.6rem .8rem;border:1.5px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.85rem;background:var(--paper)}
+  .mapa-search input:focus{outline:none;border-color:var(--river-bright)}
+  .mapa-filtros{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;padding:.8rem 1.1rem;border-bottom:1px solid var(--border-soft)}
+  .mapa-filtros select{width:100%;padding:.5rem .6rem;border:1.5px solid var(--border);border-radius:9px;font-size:.78rem;background:var(--surface);color:var(--ink);font-family:'Plus Jakarta Sans',sans-serif}
+  .mapa-toggle{grid-column:1/-1;display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ink-soft);font-weight:600;cursor:pointer;user-select:none}
+  .mapa-toggle input{width:16px;height:16px;accent-color:var(--gold-bright)}
+
+  .mapa-leyenda{display:flex;flex-wrap:wrap;gap:.5rem .8rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--border-soft);font-size:.68rem;color:var(--stone)}
+  .mapa-leyenda span{display:inline-flex;align-items:center;gap:.35rem}
+  .mapa-leyenda i{width:9px;height:9px;border-radius:50%;display:inline-block;flex-shrink:0}
+
+  .mapa-resultados-head{display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--stone);text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border-soft)}
+  .mapa-lista{flex:1;overflow-y:auto;padding:.4rem}
+  .mapa-item{display:flex;gap:.65rem;align-items:flex-start;padding:.65rem .7rem;border-radius:11px;cursor:pointer;transition:background .15s;border:1px solid transparent}
+  .mapa-item:hover{background:var(--paper)}
+  .mapa-item.activo{background:var(--paper);border-color:var(--river-bright)}
+  .mapa-item-dot{width:10px;height:10px;border-radius:50%;margin-top:.3rem;flex-shrink:0}
+  .mapa-item-nombre{font-size:.83rem;font-weight:700;color:var(--ink);line-height:1.3}
+  .mapa-item-sub{font-size:.72rem;color:var(--stone);margin-top:.1rem}
+  .mapa-item-badge{display:inline-block;margin-top:.3rem;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;padding:.1rem .4rem;border-radius:999px;background:#FBEACB;color:#7A4D0A}
+  .mapa-vacio{padding:2rem 1rem;text-align:center;color:var(--stone);font-size:.83rem}
+
+  #mapaLeaflet{height:min(78vh,720px);border-radius:var(--radius);border:1px solid var(--border);box-shadow:var(--shadow-sm);overflow:hidden}
+
+  .leaflet-popup-content-wrapper{border-radius:14px;padding:0;box-shadow:var(--shadow-md)}
+  .leaflet-popup-content{margin:0;width:280px !important}
+  .lp-band{height:5px;background:linear-gradient(90deg,var(--ink) 0 25%,var(--river-bright) 25% 50%,var(--achiote-bright) 50% 75%,var(--gold-bright) 75% 100%)}
+  .lp-body{padding:.9rem 1rem 1rem}
+  .lp-badge{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;text-transform:uppercase;padding:.14rem .5rem;border-radius:999px;margin-bottom:.4rem}
+  .lp-nombre{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);margin-bottom:.35rem;line-height:1.25}
+  .lp-fila{display:flex;gap:.4rem;font-size:.75rem;color:var(--ink-soft);padding:.2rem 0;border-top:1px solid var(--border-soft)}
+  .lp-fila:first-of-type{border-top:none;margin-top:.2rem}
+  .lp-fila b{font-weight:700;color:var(--stone);min-width:60px;font-size:.66rem;text-transform:uppercase;font-family:'IBM Plex Mono',monospace;padding-top:.1rem}
+  .lp-link{display:inline-block;margin-top:.6rem;font-size:.76rem;font-weight:700;color:var(--river)}
+
+  .marker-punto{background:var(--gold-bright);border:2.5px solid #fff;border-radius:50%;box-shadow:0 2px 8px rgba(184,118,21,.5)}
+  .marker-normal{border:2px solid #fff;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+
+<div id="loader">
+  <div class="loader-seal"><img src="assets/img/logo-uspp-icon.png" alt="" /></div>
+  <div class="loader-label">Red de Salud Satipo</div>
+  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+
+<header>
+  <div class="container navbar">
+    <a href="index.html" class="brand">
+      <img src="assets/img/logo-uspp-icon.png" alt="USPP" class="brand-icon" />
+      <div class="brand-sep"></div>
+      <div><div class="brand-name">USPP · SATIPO</div><div class="brand-sub">Red de Salud</div></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#nosotros">Nosotros</a>
+      <a href="index.html#seguros">Seguros SIS</a>
+      <a href="mapa.html" class="active">Mapa</a>
+      <a href="index.html#contacto">Contacto</a>
+      <a href="lineas-atencion.html">Líneas de Atención</a>
+      <a href="galeria.html">Galería</a>
+      <a href="modulos.html" class="btn btn-gold btn-sm">📊 Módulos</a>
+    </nav>
+    <button class="nav-burger" id="navBurger" aria-label="Abrir menú"><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-scrim" id="mobileScrim"></div>
+<nav class="mobile-panel" id="mobilePanel">
+  <a href="index.html">Inicio</a>
+  <a href="index.html#nosotros">Nosotros</a>
+  <a href="index.html#seguros">Seguros SIS</a>
+  <a href="mapa.html">Mapa</a>
+  <a href="index.html#contacto">Contacto</a>
+  <a href="lineas-atencion.html">Líneas de Atención</a>
+  <a href="galeria.html">Galería</a>
+  <a href="pes.html">Trámite de Sepelio</a>
+  <a href="modulos.html">📊 Módulos</a>
+</nav>
+
+<main>
+  <section class="page-hero hero-ink">
+    <div class="hero-contour"></div>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="container">
+      <a href="index.html" class="back-link">← Volver al inicio</a>
+      <div class="page-hero-eyebrow"><span class="hero-kicker-dot"></span>Cobertura territorial</div>
+      <h1 class="page-title">Mapa de Establecimientos</h1>
+      <p class="page-subtitle">Los 91 establecimientos de salud de la provincia de Satipo, y los puntos donde trabaja directamente
+        nuestro equipo de digitación — dentro de esos mismos establecimientos.</p>
+      <div class="page-meta">
+        <div class="meta-chip"><strong>Establecimientos</strong><span id="metaTotal">92</span></div>
+        <div class="meta-chip"><strong>Puntos de digitación</strong><span>12</span></div>
+        <div class="meta-chip"><strong>Distritos</strong><span>9</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-mist">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Explora el mapa</div>
+        <h2 class="section-title">Busca por nombre, distrito o tipo</h2>
+        <p class="section-subtitle">Los marcadores dorados ⬤ son nuestros puntos de digitación. Los demás son establecimientos de salud de la provincia.</p>
+      </div>
+
+      <div class="mapa-shell">
+        <div class="mapa-panel">
+          <div class="mapa-search">
+            <input id="buscador" type="text" placeholder="🔍 Buscar establecimiento..." />
+          </div>
+          <div class="mapa-filtros">
+            <select id="filtroDistrito"><option value="">Todos los distritos</option></select>
+            <select id="filtroTipo"><option value="">Todos los tipos</option></select>
+            <label class="mapa-toggle">
+              <input type="checkbox" id="soloPuntos" />
+              ⭐ Ver solo puntos de digitación (12)
+            </label>
+          </div>
+          <div class="mapa-leyenda">
+            <span><i style="background:var(--gold-bright)"></i> Punto de digitación</span>
+            <span><i style="background:var(--river-bright)"></i> Puesto de Salud</span>
+            <span><i style="background:var(--achiote-bright)"></i> Centro de Salud</span>
+            <span><i style="background:var(--ink)"></i> Hospital</span>
+          </div>
+          <div class="mapa-resultados-head">
+            <span id="contadorResultados">92 resultados</span>
+            <span>Toca para ver en el mapa →</span>
+          </div>
+          <div class="mapa-lista" id="listaEstablecimientos"></div>
+        </div>
+
+        <div id="mapaLeaflet"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/img/logo-uspp-icon.png" alt="USPP" />
+        <div><div class="footer-brand-name">USPP · Red de Salud Satipo</div><div class="footer-brand-sub">Unidad de Seguros Públicos y Privados</div></div>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h4>Navegación</h4><a href="index.html">Inicio</a><a href="index.html#nosotros">Nosotros</a><a href="index.html#contacto">Contacto</a></div>
+        <div class="footer-col"><h4>Servicios</h4><a href="pes.html">Trámite de Sepelio</a><a href="galeria.html">Galería</a><a href="modulos.html">Módulos</a></div>
+        <div class="footer-col"><h4>Unidad</h4><a href="tel:+5164545411">(064) 545-411</a><a href="mailto:usppredsatipo@outlook.com">usppredsatipo@outlook.com</a></div>
+      </div>
+    </div>
+    <div class="footer-inner">
+      <span>&copy; <span id="year"></span> USPP – Red de Salud Satipo. Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/mapa.js"></script>
+</body>
+</html>

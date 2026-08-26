@@ -245,32 +245,17 @@ header{
 .sis-flip-card:hover .sis-flip-inner,.sis-flip-card:focus-within .sis-flip-inner{transform:rotateY(180deg)}
 .sis-flip-front,.sis-flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
 .sis-flip-front{background:var(--surface)}
-.sis-flip-back{transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:1.4rem}
+.sis-flip-back{transform:rotateY(180deg);display:flex;flex-direction:column;justify-content:center;padding:1.4rem;background:linear-gradient(150deg,#18171B 0%,var(--ink) 45%,var(--river-deep) 100%)}
 .sis-img{width:100%;height:165px;object-fit:cover;display:block}
 .sis-body{padding:.9rem 1rem}
-.sis-badge{display:inline-block;padding:.16rem .5rem;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;margin-bottom:.4rem;letter-spacing:.04em}
+.sis-badge{display:inline-block;padding:.16rem .5rem;border-radius:999px;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;text-transform:uppercase;margin-bottom:.4rem;letter-spacing:.04em;background:#DCEAF3;color:#1B4A6E}
 .sis-title{font-family:'Space Grotesk',sans-serif;font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:.3rem}
 .sis-desc{font-size:.76rem;color:var(--stone);line-height:1.5}
 .sis-flip-back h4{font-size:.92rem;color:#fff;margin-bottom:.75rem;font-weight:700;font-family:'Space Grotesk',sans-serif}
 .sis-flip-back li{padding:.34rem 0;color:rgba(255,255,255,.88);font-size:.78rem;display:flex;align-items:center;gap:.4rem;border-bottom:1px solid rgba(255,255,255,.12)}
 .sis-flip-back li:last-child{border:none}
 .sis-flip-back li::before{content:"✓";font-weight:800;color:#F4C868}
-.sis-ribbon{position:absolute;top:14px;left:-58px;width:210px;text-align:center;padding:4px 0;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;transform:rotate(-35deg);z-index:10;box-shadow:0 3px 10px rgba(0,0,0,.2)}
-[data-variant="gratuito"] .sis-badge{background:#DCEEE4;color:#1C5A47}
-[data-variant="gratuito"] .sis-ribbon{background:linear-gradient(135deg,#2E8064,#1C5A47)}
-[data-variant="gratuito"] .sis-flip-back{background:linear-gradient(135deg,#1C5A47,#123B2F)}
-[data-variant="paratodos"] .sis-badge{background:#DCEAF3;color:#1B4A6E}
-[data-variant="paratodos"] .sis-ribbon{background:linear-gradient(135deg,#4A90CC,#1B4A6E)}
-[data-variant="paratodos"] .sis-flip-back{background:linear-gradient(135deg,#1B4A6E,#0F3552)}
-[data-variant="independiente"] .sis-badge{background:#EADCEE;color:#5B2A63}
-[data-variant="independiente"] .sis-ribbon{background:linear-gradient(135deg,#8E5C97,#5B2A63)}
-[data-variant="independiente"] .sis-flip-back{background:linear-gradient(135deg,#5B2A63,#3B1A41)}
-[data-variant="microempresas"] .sis-badge{background:#FBEACB;color:#7A4D0A}
-[data-variant="microempresas"] .sis-ribbon{background:linear-gradient(135deg,#E49C30,#B87615)}
-[data-variant="microempresas"] .sis-flip-back{background:linear-gradient(135deg,#8A5A10,#5C3B08)}
-[data-variant="emprendedor"] .sis-badge{background:#F6DBE1;color:#7A1B36}
-[data-variant="emprendedor"] .sis-ribbon{background:linear-gradient(135deg,#CC3054,#A02748)}
-[data-variant="emprendedor"] .sis-flip-back{background:linear-gradient(135deg,#8A1E38,#5C1226)}
+.sis-ribbon{position:absolute;top:14px;left:-58px;width:210px;text-align:center;padding:4px 0;font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#fff;transform:rotate(-35deg);z-index:10;box-shadow:0 3px 10px rgba(0,0,0,.2);background:linear-gradient(135deg,var(--ink),var(--river-deep))}
 
 /* ===================== DOCUMENTOS SLIDER ===================== */
 .doc-section{background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.85);border-radius:var(--radius-lg);padding:1.9rem 1.5rem;box-shadow:var(--shadow-md)}
