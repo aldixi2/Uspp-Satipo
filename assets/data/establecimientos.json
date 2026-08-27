@@ -589,8 +589,8 @@
   "horario": "08:00 - 14:00 HORAS",
   "director": "LEIDY BRILLITH LIMAYMANTA RAMIREZ",
   "camas": 0,
-  "lat": -11.2555478,
-  "lng": -74.6394331,
+  "lat": -11.171769,
+  "lng": -74.452599,
   "es_punto_digitacion": false,
   "etiqueta_punto": ""
  },
@@ -1201,8 +1201,8 @@
   "horario": "24 HORAS",
   "director": "DAVID MIGUEL ZARATE SOTO",
   "camas": 58,
-  "lat": -11.24928,
-  "lng": -74.6386,
+  "lat": -11.248685,
+  "lng": -74.635713,
   "es_punto_digitacion": true,
   "etiqueta_punto": "Hospital Manuel Ángel Higa Arakaki"
  },
