@@ -499,3 +499,16 @@ footer{background:linear-gradient(155deg,#141317,var(--ink) 55%,var(--river-deep
   .id-card-grid{grid-template-columns:1fr}
   .hero-actions .btn{flex:1 1 auto}
 }
+
+/* ===================== CONVENIOS ===================== */
+.status-dot.off{background:var(--achiote-bright);box-shadow:0 0 0 3px rgba(204,48,84,.18)}
+.module-card.is-off{background:#FBFAFA}
+.module-card.is-off::before{filter:grayscale(.6);opacity:.7}
+.module-card.is-off .module-icon-wrap{filter:grayscale(.45);opacity:.85}
+.btn-link.is-disabled{color:var(--stone-soft);cursor:not-allowed;font-weight:600}
+.convenios-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr))}
+.convenios-note{margin-top:1.6rem;max-width:none;display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.2rem}
+.convenios-note .info-card-icon{margin-bottom:0}
+.convenios-note h3{margin:0;flex:1 1 220px}
+.convenios-note p{flex:1 1 100%;margin:0}
+.convenios-note .btn{margin-right:.3rem}
