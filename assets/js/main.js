@@ -55,12 +55,13 @@ window.addEventListener("load", () => {
   const btnClose = document.getElementById("modalClose");
   const btnOk = document.getElementById("modalOk");
 
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      overlay.classList.add("show");
-      document.body.style.overflow = "hidden";
-    }, 800);
-  });
+  // Si existe la pantalla de afiliados (splash), el anuncio aparece cuando ésta se cierra.
+  const showModal = () => setTimeout(() => {
+    overlay.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }, 500);
+  if (document.getElementById("splash")) window.addEventListener("splash:done", showModal, { once: true });
+  else window.addEventListener("load", showModal);
 
   function closeModal() {
     overlay.classList.remove("show");

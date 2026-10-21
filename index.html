@@ -11,11 +11,18 @@
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-seal"><img src="assets/img/logo-uspp-icon.png" alt="" /></div>
-  <div class="loader-label">Red de Salud Satipo</div>
-  <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+<!-- SPLASH · TOTAL DE AFILIADOS -->
+<div id="splash" role="dialog" aria-modal="true" aria-label="Total de afiliados al SIS en la Red de Salud Satipo">
+  <div class="sp-wrap">
+    <div class="sp-brand"><img src="assets/img/logo-uspp-icon.png" alt="" /><i></i><span>USPP · Red de Salud Satipo</span></div>
+    <div class="sp-number" id="spNumber" aria-live="off">0</div>
+    <p class="sp-caption"><b>afiliados al SIS</b> en la provincia de Satipo</p>
+    <div class="sp-actions">
+      <button class="sp-enter" id="spEnter" type="button">Ingresar <span aria-hidden="true">→</span></button>
+      <div class="sp-timer" id="spTimer" aria-hidden="true"><i></i></div>
+    </div>
+    <div class="sp-foot">Actualizado al <span id="spUpdated"></span></div>
+  </div>
 </div>
 
 <!-- ===== MODAL ANUNCIO: CÓDIGOS MODULARES RG 002-2026 ===== -->
@@ -86,13 +93,18 @@
     <nav class="nav-links">
       <a href="#nosotros">Nosotros</a>
       <a href="#seguros">Seguros SIS</a>
-      <a href="#documentos">Documentos</a>
-      <a href="https://aldixi2.github.io/AFIL_MAP/">Mapa</a>
-      <a href="#contacto">Contacto</a>
-      <a href="lineas-atencion.html">Líneas de Atención</a>
-      <a href="galeria.html">Galería</a>
       <a href="pes.html">Trámite de Sepelio</a>
       <a href="convenios.html">🤝 Convenios</a>
+      <a href="https://aldixi2.github.io/AFIL_MAP/">Mapa</a>
+      <a href="#contacto">Contacto</a>
+      <div class="nav-more">
+        <button type="button" class="nav-more-btn" aria-haspopup="true">Más <span aria-hidden="true">▾</span></button>
+        <div class="nav-menu">
+          <a href="#documentos">Documentos</a>
+          <a href="lineas-atencion.html">Líneas de Atención</a>
+          <a href="galeria.html">Galería</a>
+        </div>
+      </div>
       <a href="modulos.html" class="btn btn-gold btn-sm">📊 Módulos</a>
     </nav>
     <button class="nav-burger" id="navBurger" aria-label="Abrir menú"><span></span></button>
@@ -110,7 +122,6 @@
   <a href="lineas-atencion.html">Líneas de Atención</a>
   <a href="galeria.html">Galería</a>
   <a href="pes.html">Trámite de Sepelio</a>
-  <a href="convenios.html">🤝 Convenios</a>
   <a href="modulos.html">📊 Módulos</a>
 </nav>
 
@@ -126,18 +137,10 @@
         <div>
           <div class="hero-kicker"><span class="hero-kicker-dot"></span>Unidad de Seguros Públicos y Privados</div>
           <h1 class="hero-title">Aseguramiento en salud que llega hasta la <span class="hero-highlight">Selva Central</span></h1>
-          <p class="hero-text">Coordinamos el Seguro Integral de Salud (SIS) en toda la provincia de Satipo: afiliaciones, producción de FUA y el sistema de referencias y contrarreferencias, conectando a cada micro red con una atención oportuna.</p>
+          <p class="hero-text">Coordinamos el Seguro Integral de Salud (SIS) en toda la provincia: afiliaciones, producción de FUA y referencias, conectando a cada micro red con una atención oportuna.</p>
           <div class="hero-actions">
             <button class="btn btn-white" onclick="window.location.href='#seguros'">📄 Conocer el SIS</button>
             <button class="btn btn-ghost-light" onclick="window.location.href='pes.html'">⚰️ Trámite de sepelio</button>
-            <button class="btn btn-ghost-light" onclick="window.location.href='modulos.html'">📊 Módulos</button>
-          </div>
-          <div class="hero-notice">
-            <div class="hero-notice-icon">🩺</div>
-            <div>
-              <div class="hero-notice-title">Afiliación sin costo</div>
-              <p class="hero-notice-text">El SIS Gratuito cubre a gestantes, niños menores de 5 años y personas en pobreza o pobreza extrema, sin costo alguno.</p>
-            </div>
           </div>
         </div>
 
@@ -148,14 +151,35 @@
             <div class="id-card-title">Unidad de Seguros Públicos y Privados</div>
             <div class="id-card-grid">
               <div class="id-card-field wide"><div class="id-field-label">Jefatura USPP</div><div class="id-field-value">Econ. Estefany Hilario Albiño</div></div>
-              <div class="id-card-field wide"><div class="id-field-label">Dirección Ejecutiva · Red Salud Satipo</div><div class="id-field-value">Obst. Ruth Calderón Huamán</div></div>
               <div class="id-card-field"><div class="id-field-label">Teléfono</div><div class="id-field-value mono">925 466 291</div></div>
               <div class="id-card-field"><div class="id-field-label">Correo</div><div class="id-field-value mono" style="font-size:.72rem">usppredsatipo@outlook.com</div></div>
             </div>
-            <div class="id-card-footer">Jr. Manuel Prado 363, Satipo, Junín 12261<br/>Central Red Salud Satipo: (064) 545-411<br/>Lun a vie · 8:00 a.m.–1:00 p.m. y 2:30–5:30 p.m.</div>
+            <div class="id-card-footer">Jr. Manuel Prado 363, Satipo, Junín 12261<br/>Lun a vie · 8:00 a.m.–1:00 p.m. y 2:30–5:30 p.m.</div>
           </div>
           <div class="id-card-seal"><div class="seal seal-ink" style="width:78px;height:78px;background:#fff"><img src="assets/img/logo-uspp-icon.png" alt="" /></div></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AFILIACIÓN EN CIFRAS -->
+  <section id="cifras" class="section cifras">
+    <div class="container">
+      <div class="section-header center" style="margin-left:auto;margin-right:auto">
+        <div class="section-eyebrow" style="justify-content:center">Afiliación en cifras</div>
+        <h2 class="section-title">Asegurados SIS en la provincia de Satipo</h2>
+        <p class="section-subtitle">Padrón consolidado de todos los establecimientos de la Red. Actualizado al <b id="cfFecha"></b>.</p>
+      </div>
+      <div class="cf-kpis">
+        <div class="cf-kpi cf-main"><div class="cf-val" data-cf="total">0</div><div class="cf-lbl">Total de afiliados</div></div>
+        <div class="cf-kpi"><div class="cf-val" data-cf="establecimientos">0</div><div class="cf-lbl">Establecimientos</div></div>
+        <div class="cf-kpi"><div class="cf-val" data-cf="nuevos2026">0</div><div class="cf-lbl">Nuevos en 2026</div></div>
+        <div class="cf-kpi"><div class="cf-val" data-cf="femenino">0</div><div class="cf-lbl">Mujeres</div></div>
+        <div class="cf-kpi"><div class="cf-val" data-cf="masculino">0</div><div class="cf-lbl">Hombres</div></div>
+      </div>
+      <div class="cf-panels">
+        <div class="cf-panel"><h3>Afiliados por distrito</h3><div id="cfDistritos"></div></div>
+        <div class="cf-panel"><h3>Por etapa de vida</h3><div id="cfEtareo"></div></div>
       </div>
     </div>
   </section>
@@ -426,7 +450,7 @@
         </div>
         <div class="footer-col">
           <h4>Servicios</h4>
-          <a href="pes.html">Trámite de Sepelio</a><a href="lineas-atencion.html">Líneas de Atención</a><a href="galeria.html">Galería</a><a href="convenios.html">Convenios</a><a href="modulos.html">Módulos</a>
+          <a href="pes.html">Trámite de Sepelio</a><a href="convenios.html">Convenios</a><a href="lineas-atencion.html">Líneas de Atención</a><a href="galeria.html">Galería</a><a href="modulos.html">Módulos</a>
         </div>
         <div class="footer-col">
           <h4>Unidad</h4>
@@ -446,5 +470,8 @@
 </footer>
 
 <script src="assets/js/main.js"></script>
+<script src="assets/data/afiliados-data.js"></script>
+<script src="assets/js/splash.js"></script>
+<script src="assets/js/cifras.js"></script>
 </body>
 </html>
